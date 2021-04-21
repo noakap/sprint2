@@ -48,7 +48,8 @@ function drawImg(src, isFromStorage = false) {
         canvas = gCanvas;
         src = src.substring(22);
     }
-    img.src = src;
+    // img.src = src;
+    // console.log(src);
     canvas.style = `background-image: url("${src}");background-size: cover;`
 }
 

@@ -22,7 +22,7 @@ function initgImgs() {
 }
 
 function initImg() {
-    return { id: ++gIdImg, url: `meme-imgs/${gIdImg}.jpg`, keywords: [] };
+    return { id: ++gIdImg, url: `./meme-imgs/${gIdImg}.jpg`, keywords: [] };
 }
 
 function initImgMemeLine(id) {

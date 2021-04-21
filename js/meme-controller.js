@@ -42,14 +42,14 @@ function onCloseModal() {
 }
 
 function drawImg(src, isFromStorage = false) {
-    var img = new Image();
+    // var img = new Image();
     let canvas = gCanvasStorage;
     if (!isFromStorage) {
         canvas = gCanvas;
         src = src.substring(22);
+        console.log(src);
     }
     // img.src = src;
-    // console.log(src);
     canvas.style = `background-image: url("${src}");background-size: cover;`
 }
 

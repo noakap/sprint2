@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/style.css">
+    <title>MemeGen</title>
+    <link rel="icon" href="https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/samsung/265/circled-m_24c2.png">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+
+
+<body onload="onInit()">
+
+    <header class="main-header container flex space-between align-center">
+        <div class="logo">MemeGen</div>
+        <ul class="main-nav flex clean-list">
+            <li>Gallery</li>
+            <li onclick="onOpenModalStorage()">Memes</li>
+            <li>About</li>
+
+        </ul>
+    </header>
+    <main class="main-content container">
+        <form class="search">
+            <input type="text" placeholder="Search..." class="input-search">
+            <button class="btn-search" type="submit" onclick="onfilterImgs(event)"><i class="fa fa-search"></i></button>
+        </form>
+        <div class="imags-container grid">
+        </div>
+    </main>
+    <div class="meme-editor modal">
+        <div class="modal-content">
+            <span onclick="onCloseModal()" class="close">&times;</span>
+            <div class="edior grid-modal">
+                <canvas class="img-canvas" id="img-canvas"></canvas>
+                <div class="edit-btns">
+                    <input type="text" placeholder="Enter Text..." class="input-text" oninput="onEnterText(value)">
+                    <div class="edit-line">
+                        <button class="btn-move-down btn" value="down" onclick="onMoveDownOrUp(this.value)">&darr;</button>
+                        <button class="btn-move-up btn" value="up" onclick="onMoveDownOrUp(this.value)">&uarr;</button>
+                        <button class="btn-switch-line btn" onclick="onSwitchLine()">&udarr;</button>
+                        <button class="btn-add-line btn" onclick="onAddLine()">&plus;</button>
+                        <button class="btn-delete-line btn" onclick="onDeleteLine()">&minus;</button>
+                    </div>
+                    <div class="edit-text">
+                        <button class="btn-increase-font-size btn" value="increase" onclick="onChangeFontSize(this.value)">&plus;&#65;</button>
+                        <button class="btn-decrease-font-size btn" value="decrease" onclick="onChangeFontSize(this.value)">&minus;&#65;</button>
+                        <button class="btn-text-align-left btn" value="left" onclick="onChangeAlignment(this.value)">align-left</button>
+                        <button class="btn-text-align-center btn" value="center" onclick="onChangeAlignment(this.value)">align-center</button>
+                        <button class="btn-text-align-right btn" value="right" onclick="onChangeAlignment(this.value)">align-right</button>
+                        <div class="color">
+                            <label for="stroke-color">stroke:</label>
+                            <select class="strokeColor" onchange="onChangeColor(this.className ,this.value.substring(2))">
+                                <option>🟦 blue</option>
+                                <option>⬛ black</option>
+                                <option>🟩 green</option>
+                                <option>🟥 red</option>
+                                <option>🟪 pink</option>
+                                <option>🟧 orange</option>
+                                <option>🟨 yellow</option>
+                            </select>
+                            <label for="font-color">font:</label>
+                            <select class="fillColor" onchange="onChangeColor(this.className ,this.value.substring(2))">
+                                <option>🟪 pink</option>
+                                <option>⬛ black</option>
+                                <option>🟩 green</option>
+                                <option>🟥 red</option>
+                                <option>🟦 blue</option>
+                                <option>🟧 orange</option>
+                                <option>🟨 yellow</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="share">
+                        <div class="share-container">
+                            <form action="" method="POST" enctype="multipart/form-data" onsubmit="uploadImg(this, event)">
+                                <input name="img" id="imgData" type="hidden" />
+                                <button class="btn publish btn" type="submit">share</button>
+                                <button class="btn publish btn" onclick="onSaveToStorage()">save to storage</button>
+                                <a href="#" class="download btn" onclick="downloadImg(this)" download="my-img.jpg">Save</a>
+                            </form>
+                            <input type="file" class="file-input btn" name="image" onchange="onImgInput(event)" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    </div>
+    <div class="storage modal">
+        <div class="modal-content">
+            <span onclick="onCloseModalStorage()" class="close-storage">&times;</span>
+            <canvas class="img-canvas-storage" id="img-canvas-storage"></canvas>
+        </div>
+    </div>
+    <script src="js/storage.service.js"></script>
+    <script src="js/upload-service.js"></script>
+    <script src="js/meme-service.js"></script>
+    <script src=" js/meme-controller.js"></script>
+</body>
+
+</html>

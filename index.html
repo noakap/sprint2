@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="css/style.css">
     <title>MemeGen</title>
-    <link rel="icon" href="https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/samsung/265/circled-m_24c2.png">
+    <link rel="icon" href="imgs/icon.psd">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 
@@ -15,7 +15,9 @@
 <body onload="onInit()">
 
     <header class="main-header container flex space-between align-center">
-        <div class="logo">MemeGen</div>
+        <!-- <div class="logo">MemeGen</div> -->
+        <div class="logo">
+            <img class="logo-img" src="imgs/logo.png"> </div>
         <ul class="main-nav flex clean-list">
             <li>Gallery</li>
             <li onclick="onOpenModalStorage()">Memes</li>
@@ -33,7 +35,7 @@
     </main>
     <div class="meme-editor modal">
         <div class="modal-content">
-            <span onclick="onCloseModal()" class="close">&times;</span>
+            <div onclick="onCloseModal()" class="close">&times;</div>
             <div class="edior grid-modal">
                 <canvas class="img-canvas" id="img-canvas"></canvas>
                 <div class="edit-btns">
@@ -41,16 +43,16 @@
                     <div class="edit-line">
                         <button class="btn-move-down btn" value="down" onclick="onMoveDownOrUp(this.value)">&darr;</button>
                         <button class="btn-move-up btn" value="up" onclick="onMoveDownOrUp(this.value)">&uarr;</button>
-                        <button class="btn-switch-line btn" onclick="onSwitchLine()">&udarr;</button>
-                        <button class="btn-add-line btn" onclick="onAddLine()">&plus;</button>
-                        <button class="btn-delete-line btn" onclick="onDeleteLine()">&minus;</button>
+                        <button class="btn-switch-line btn" onclick="onSwitchLine()"><img class="btn-img" src="imgs/icons/up-and-down.png"></button>
+                        <button class="btn-add-line btn" onclick="onAddLine()"><img class="btn-img" src="imgs/icons/add.png"></button>
+                        <button class="btn-delete-line btn" onclick="onDeleteLine()"><img class="btn-img" src="imgs/icons/trash.png"></button>
                     </div>
                     <div class="edit-text">
-                        <button class="btn-increase-font-size btn" value="increase" onclick="onChangeFontSize(this.value)">&plus;&#65;</button>
-                        <button class="btn-decrease-font-size btn" value="decrease" onclick="onChangeFontSize(this.value)">&minus;&#65;</button>
-                        <button class="btn-text-align-left btn" value="left" onclick="onChangeAlignment(this.value)">align-left</button>
-                        <button class="btn-text-align-center btn" value="center" onclick="onChangeAlignment(this.value)">align-center</button>
-                        <button class="btn-text-align-right btn" value="right" onclick="onChangeAlignment(this.value)">align-right</button>
+                        <button class="btn-increase-font-size btn" value="increase" onclick="onChangeFontSize(this.value)"><img class="btn-img" src="imgs/icons/increase-font-icon.png"></button>
+                        <button class="btn-decrease-font-size btn" value="decrease" onclick="onChangeFontSize(this.value)"><img class="btn-img" src="imgs/icons/decrease-font-icon.png"></button>
+                        <button class="btn-text-align-left btn" value="left" onclick="onChangeAlignment(this.value)"><img class="btn-img" src="imgs/icons/align-to-right.png"></button>
+                        <button class="btn-text-align-center btn" value="center" onclick="onChangeAlignment(this.value)"><img class="btn-img" src="imgs/icons/center-text-alignment.png"></button>
+                        <button class="btn-text-align-right btn" value="right" onclick="onChangeAlignment(this.value)"><img class="btn-img" src="imgs/icons/align-to-left.png"></button>
                         <div class="color">
                             <label for="stroke-color">stroke:</label>
                             <select class="strokeColor" onchange="onChangeColor(this.className ,this.value.substring(2))">
@@ -78,11 +80,11 @@
                         <div class="share-container">
                             <form action="" method="POST" enctype="multipart/form-data" onsubmit="uploadImg(this, event)">
                                 <input name="img" id="imgData" type="hidden" />
-                                <button class="btn publish btn" type="submit">share</button>
-                                <button class="btn publish btn" onclick="onSaveToStorage()">save to storage</button>
-                                <a href="#" class="download btn" onclick="downloadImg(this)" download="my-img.jpg">Save</a>
+                                <!-- <input type="file" class="file-input btn" name="image" onchange="onImgInput(event)" /> -->
                             </form>
-                            <input type="file" class="file-input btn" name="image" onchange="onImgInput(event)" />
+                            <a href="#" class="download btn" onclick="onDownloadImg(this)" download="my-img.jpg"><img class="btn-img" src="imgs/icons/download.png"></a>
+                            <button class="btn publish btn" type="submit"><img class="btn-img" src="imgs/icons/facebook-logo.png"></button>
+                            <button class="btn publish btn" onclick="onSaveToStorage()"><img class="btn-img" src="imgs/icons/upload-file.png"></button>
                         </div>
                     </div>
                 </div>
@@ -97,9 +99,9 @@
             <canvas class="img-canvas-storage" id="img-canvas-storage"></canvas>
         </div>
     </div>
-    <script src="js/storage.service.js"></script>
-    <script src="js/upload-service.js"></script>
-    <script src="js/meme-service.js"></script>
+    <script src="js/service/storage.service.js"></script>
+    <script src="js/service/upload-service.js"></script>
+    <script src="js/service/meme-service.js"></script>
     <script src=" js/meme-controller.js"></script>
 </body>
 

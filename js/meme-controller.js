@@ -60,7 +60,7 @@ function drawText(isFromStorage = false) {
     var meme = getImgMemes();
     var ctx = gCtx;
     if (isFromStorage) {
-        meme = loadFromStorage('meme');
+        meme = loadFromStorage('memes');
         ctx = gCtxcStorage;
     };
     meme.lines.forEach(line => {
@@ -123,9 +123,9 @@ function clearCanvas() {
 
 function onSaveToStorage() {
     const img = getCurrImg();
-    saveToStorage(img, `img`);
+    saveToStorage(img, `imgs`);
     const meme = getImgMemes()
-    saveToStorage(meme, `meme`);
+    saveToStorage(meme, `memes`);
 }
 
 function onCloseModalStorage() {
@@ -134,9 +134,13 @@ function onCloseModalStorage() {
 }
 
 function onOpenModalStorage() {
-    const img = loadFromStorage('img');
+    const img = loadFromStorage('imgs');
     drawImg(img.url, true);
     drawText(true);
     const elModal = document.querySelector('.storage');
     elModal.style.display = "block";
+}
+
+function onDownloadImg(elLink) {
+    downloadImg(elLink, gCanvas);
 }

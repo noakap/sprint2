@@ -16,7 +16,7 @@ function onInit() {
 function renderImgs(imgs = getImgs()) {
     const elContainer = document.querySelector('.imags-container');
     let strHtml = ``;
-    imgs.map(img => strHtml += `<img class="img" id="${img.id}" onclick="onImageClick(this)" 
+    imgs.map(img => strHtml += `<img class="img" id="${img.id}" onclick="onImageClick(this.id)" 
     src="${img.url}" alt="">`);
     elContainer.innerHTML = strHtml;
 }
@@ -29,10 +29,11 @@ function onfilterImgs(ev) {
     renderImgs(imgs);
 }
 
-function onImageClick(img) {
+function onImageClick(imgId) {
     const elModal = document.querySelector('.modal');
-    drawImg(img.src);
-    setCurrImgId(img.id);
+    const src = getImgUrl(+imgId);
+    drawImg(src);
+    setCurrImgId(imgId);
     elModal.style.display = "block";
 }
 
@@ -42,14 +43,10 @@ function onCloseModal() {
 }
 
 function drawImg(src, isFromStorage = false) {
-    // var img = new Image();
     let canvas = gCanvasStorage;
     if (!isFromStorage) {
         canvas = gCanvas;
-        src = src.substring(22);
-        console.log(src);
     }
-    // img.src = src;
     canvas.style = `background-image: url("${src}");background-size: cover;`
 }
 

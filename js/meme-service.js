@@ -152,3 +152,7 @@ function getCurrImg() {
 function switchSelectedLineIdx() {
     gMemes[gCurrImgId].selectedLineIdx = (gMemes[gCurrImgId].selectedLineIdx + 1) % gMemes[gCurrImgId].lines.length;
 }
+
+function getImgUrl(imgId) {
+    return gImgs.find(img => img.id === imgId).url;
+}
